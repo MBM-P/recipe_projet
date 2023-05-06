@@ -1,11 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Recette(models.Model):
-    nom = models.CharField(max_length=255)
+    nom = models.CharField(max_length=100)
     description = models.TextField()
-    temps_preparation = models.PositiveIntegerField()
-    temps_cuisson = models.PositiveIntegerField()
-    personnes = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.nom
+    temps_preparation = models.IntegerField()
+    temps_cuisson = models.IntegerField()
+    personnes = models.IntegerField()
+    image = models.ImageField(upload_to='images/')

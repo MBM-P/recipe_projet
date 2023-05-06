@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from commentaires.forms import CommentaireForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-
+from .forms import RecetteForm
 @login_required
 def ajouter_commentaire(request, pk):
     recette = get_object_or_404(Recette, pk=pk)
@@ -84,4 +84,33 @@ def ajouter_dislike(request, pk):
     commentaire.dislikes += 1
     commentaire.save()
     messages.success(request, "Le commentaire a été disliké avec succès.")
+   
     return redirect('detail_recette', pk=commentaire.recette.pk)
+
+def recette_list(request):
+    recettes = Recette.objects.all()
+    return render(request, 'recette_list.html', {'recettes': recettes})
+
+
+
+def creer_recette(request):
+    if request.method == 'POST':
+        form = RecetteForm(request.POST, request.FILES)
+        if form.is_valid():
+            recette = form.save(commit=False)
+            recette.auteur = request.user
+            recette.save()
+            return redirect('detail_recette', pk=recette.pk)
+    else:
+        form = RecetteForm()
+    return render(request, 'creer_recette.html', {'form': form})
+
+
+
+def supprimer_recette(request, pk):
+    recette = get_object_or_404(Recette, pk=pk)
+    if request.user == recette.auteur:
+        recette.delete()
+        return redirect('liste_recettes')
+    else:
+        return redirect('detail_recette', pk=pk)    

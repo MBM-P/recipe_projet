@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="row">
+    {% for recette in recettes %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img class="card-img-top" src="{{ recette.image.url }}" alt="{{ recette.nom }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ recette.nom }}</h5>
+            <p class="card-text">{{ recette.description|truncatewords:20 }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">{{ recette.temps_preparation }} min</small>
+              <small class="text-muted">{{ recette.personnes }} pers</small>
+              <div class="btn-group">
+                <a href="{% url 'detail_recette' recette.pk %}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                {% if user.is_authenticated and user == recette.auteur %}
+                  <a href="{% url 'modifier_recette' recette.pk %}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                  <a href="{% url 'supprimer_recette' recette.pk %}" class="btn btn-sm btn-outline-secondary">Supprimer</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
