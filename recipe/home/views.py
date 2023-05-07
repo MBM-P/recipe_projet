@@ -5,10 +5,7 @@ from django.db.models import Avg
 
 
 def home(request):
-    recettes = Recette.objects.all()
-    for recette in recettes:
-        note_moyenne = Note.objects.filter(recette=recette).aggregate(Avg('valeur'))['valeur__avg']
-        recette.note_moyenne = note_moyenne
+    recettes = Recette.objects.annotate(note_moyenne=Avg('note__valeur')).order_by('-note_moyenne')[:3]
     context = {
         'recettes': recettes
     }

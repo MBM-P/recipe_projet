@@ -26,18 +26,31 @@
 
               <h5 class="card-title fw-bold">{{ recette.nom }} 
                 <span class="card-rating">
-                  {% if recette.note_moyenne < 2 %}
-                    <i class="bi bi-star-fill text-warning"></i>
-                  {% elif recette.note_moyenne >= 2 and recette.note_moyenne < 3 %}
-                    <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star"></i>
-                  {% elif recette.note_moyenne >= 3 and recette.note_moyenne < 4 %}
-                    <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star"></i>
-                  {% elif recette.note_moyenne >= 4 and recette.note_moyenne < 5 %}
-                    <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star"></i>
-                  {% else %}
-                    <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-                  {% endif %}
-                </span>
+                    {% if recette.note_moyenne < 0.5  %}
+                        <i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i>
+                    {% elif recette.note_moyenne >= 0.5 and recette.note_moyenne < 1 %}
+                        <i class="bi bi-star-half text-warning"></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i>
+                    {% elif recette.note_moyenne >= 1 and recette.note_moyenne < 1.5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i>
+                    {% elif recette.note_moyenne >= 1.5 and recette.note_moyenne < 2 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-half text-warning"></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i>
+                    {% elif recette.note_moyenne >= 2 and recette.note_moyenne < 2.5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star "></i><i class="bi bi-star "></i><i class="bi bi-star "></i>
+                    {% elif recette.note_moyenne >= 2.5 and recette.note_moyenne < 3 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-half text-warning"></i><i class="bi bi-star"></i><i class="bi bi-star"></i>
+                    {% elif recette.note_moyenne >= 3 and recette.note_moyenne < 3.5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star"></i><i class="bi bi-star"></i>
+                    {% elif recette.note_moyenne >= 3.5 and recette.note_moyenne < 4 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-half text-warning"></i><i class="bi bi-star"></i>
+                    {% elif recette.note_moyenne >= 4 and recette.note_moyenne < 4.5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star"></i>
+                    {% elif recette.note_moyenne >= 4.5 and recette.note_moyenne < 5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-half text-warning"></i>
+                    {% elif recette.note_moyenne == 5 %}
+                        <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning "></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+
+
+                    {% endif %}
               </h5>
               <a href="{% url 'detail_recette' recette.id %}" class="btn btn-primary mt-auto">Détails</a>
             </div>
