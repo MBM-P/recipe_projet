@@ -10,6 +10,8 @@ from commentaires.forms import CommentaireForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import RecetteForm
+from django.core.paginator import Paginator
+
 @login_required
 def ajouter_commentaire(request, pk):
     recette = get_object_or_404(Recette, pk=pk)
@@ -89,7 +91,10 @@ def ajouter_dislike(request, pk):
 
 def recette_list(request):
     recettes = Recette.objects.all()
-    return render(request, 'recette_list.html', {'recettes': recettes})
+    p= Paginator(Recette.objects.all(),6)
+    page = request.GET.get('page')
+    recipe = p.get_page(page)
+    return render(request, 'recette_list.html', {'recettes': recettes,'recipe':recipe})
 
 
 
